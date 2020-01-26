@@ -26,12 +26,12 @@
 #    guest only = yes
 
 {% for share in config.shares %}
-["{{ share.name }}"]
+[{{ share.name }}]
     path = {{ share.path }}
     valid users = @{{ share.id }}
     writeable = yes
-    public = no
-    browseable = yes
+    public = yes
+    browseable = no
     force create mode = 0770
     force directory mode = 0770
 {% endfor %}

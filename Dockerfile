@@ -22,7 +22,6 @@ ADD smb.conf.j2 /tmp/smb.conf.j2
 ADD avahia.service /etc/avahi/services/timemachine.service
 ADD supervisord.conf /etc/supervisord.conf
 
-# pykwalify -s schema.yaml -d config.yaml && j2 adduser.sh.j2 config.yaml | sh
 ENTRYPOINT ["/init.sh"]
 
 CMD ["supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]
