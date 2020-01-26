@@ -2,7 +2,7 @@
 
 # Create accounts
 {% for user in config.users %}
-grep -q "^{{ user.name }}:" /etc/passwd || useradd -p $(openssl passwd -1 {{ user.password }}) {{ user.name }}
+grep -q "^{{ user.name }}:" /etc/passwd || adduser -D -H "{{ user.name }}"
 echo -e "{{ user.password }}\n{{ user.password }}\n" | smbpasswd -s -a "{{ user.name }}"
 {%- endfor %}
 
@@ -12,7 +12,6 @@ grep -q "^{{ share.id }}:" /etc/group || addgroup {{ share.id }}
 {%- endfor %}
 
 # Create share direcory
-
 {% for share in config.shares %}
 if [ ! -d "{{ share.path }}" ]; then mkdir -p "{{ share.path }}"; chmod 770 "{{ share.path }}"; fi
 chown -R :{{ share.id }} "{{ share.path }}"
