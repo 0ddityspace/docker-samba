@@ -20,4 +20,6 @@ addgroup {{ user }} {{ share.id }}
     {%- endfor %}
 {% endfor %}
 
+ln -sf /dev/stdout /var/log/samba/samba.log
+
 exec "${@}"
