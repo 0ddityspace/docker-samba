@@ -1,0 +1,49 @@
+---
+type: map
+mapping:
+  "config":
+    type: map
+    mapping:
+      "users":
+        type: seq
+        sequence:
+          - type: map
+            mapping:
+              "name": 
+                type: str
+                required: yes
+              "password":
+                type: str
+                required: yes
+      "timemachine":
+        type: map
+        required: yes
+        mapping :
+          "enable": 
+            type: bool
+            required: yes
+          "path":
+            type: str
+          "users":
+            type: seq
+            sequence:
+              - type:   str
+      "shares":
+        type: seq
+        sequence:
+          - type: map
+            mapping :
+              "name":
+                type: str
+                required: yes
+              "id":
+                pattern: ^[a-z0-9_-]*$
+                type: str
+                required: yes
+              "path":
+                type: str
+                required: yes
+              "users":
+                type: seq
+                sequence:
+                  - type: str

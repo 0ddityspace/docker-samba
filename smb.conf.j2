@@ -1,0 +1,37 @@
+[global]
+    # Basic Samba configuration
+    server role = standalone server
+    passdb backend = tdbsam
+    obey pam restrictions = yes
+    security = user
+    printcap name = /dev/null
+    load printers = no
+    socket options = TCP_NODELAY IPTOS_LOWDELAY SO_RCVBUF=524288 SO_SNDBUF=524288
+    server string = Samba Server %v
+    map to guest = bad user
+    dns proxy = no
+    wide links = yes
+    follow symlinks = yes
+    unix extensions = no
+    acl allow execute always = yes
+    log file = /var/log/samba/%m.log
+    max log size = 1000
+
+#[guest]
+#    # This share allows anonymous (guest) access
+#    # without authentication!
+#    path = /share/
+#    read only = no
+#    guest ok = yes
+#    guest only = yes
+
+{% for share in config.shares %}
+["{{ share.name }}"]
+    path = {{ share.path }}
+    valid users = @{{ share.id }}
+    writeable = yes
+    public = no
+    browseable = yes
+    force create mode = 0770
+    force directory mode = 0770
+{% endfor %}
