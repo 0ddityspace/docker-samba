@@ -14,7 +14,7 @@ fi
 
 echo execution du fichier
 
-j2 /tmp/adduser.sh.j2 /config/config.yaml | sh
+j2 /tmp/setup.sh.j2 /config/config.yaml | sh
 
 j2 /tmp/smb.conf.j2 /config/config.yaml > /etc/samba/smb.conf
 
