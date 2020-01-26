@@ -16,7 +16,7 @@ RUN apk add --update \
 VOLUME /share
 
 ADD init.sh /
-ADD adduser.sh.j2 /tmp
+ADD setup.sh.j2 /tmp
 ADD schema.yaml /tmp
 ADD smb.conf.j2 /tmp/smb.conf.j2
 ADD avahia.service /etc/avahi/services/timemachine.service
