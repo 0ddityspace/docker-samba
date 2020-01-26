@@ -35,3 +35,13 @@
     force create mode = 0770
     force directory mode = 0770
 {% endfor %}
+
+[Public Directory]
+    comment = Contents are read/write by all.
+    path = /share/public
+    read only = no
+    guest ok = yes
+    create mask = 0666
+    force create mode = 0666
+    directory mask = 0777
+    force directory mode = 0777
