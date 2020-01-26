@@ -3,7 +3,7 @@
 # Create accounts
 {% for user in config.users %}
 grep -q "^{{ user.name }}:" /etc/passwd || useradd -p $(openssl passwd -1 {{ user.password }}) {{ user.name }}
-samba-tool user add "{{ user.name }}"
+echo -e "{{ user.password }}\n{{ user.password }}\n" | smbpasswd -s -a "{{ user.name }}"
 {%- endfor %}
 
 # Create groups
