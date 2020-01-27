@@ -49,7 +49,7 @@
 
 {% if config.timemachine is defined %}
     {% for user in config.timemachine.users %}
-[TimeMachine_{{ user }}]
+[TimeMachine]
     path = {{ config.timemachine.path }}/{{ user }}
     valid users = %U
     writable = yes
