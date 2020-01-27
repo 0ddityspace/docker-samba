@@ -18,13 +18,12 @@
     max log size = 1000
     access based share enum = yes
 
-#[guest]
-#    # This share allows anonymous (guest) access
-#    # without authentication!
-#    path = /share/
-#    read only = no
-#    guest ok = yes
-#    guest only = yes
+{% if config.timemachine is defined %}
+    # Special configuration for Apple's Time Machine
+    fruit:model = MacPro
+    fruit:advertise_fullsync = true
+    fruit:aapl = yes
+{% endif %}
 
 {% for share in config.shares %}
 [{{ share.name }}]
@@ -37,12 +36,33 @@
     force directory mode = 0770
 {% endfor %}
 
-[Public Directory]
-    comment = Contents are read/write by all.
-    path = /share/public
+{% if config.public is defined %}
+[{{ config.public.name }}]
+    path = {{ config.public.path }}
     read only = no
     guest ok = yes
     create mask = 0666
     force create mode = 0666
     directory mask = 0777
     force directory mode = 0777
+{% endif %}
+
+{% if config.timemachine is defined %}
+    {% for user in config.timemachine.users %}
+[TimeMachine_{{ user }}]
+    path = {{ config.timemachine.path }}/{{ user }}
+    valid users = %U
+    writable = yes
+    durable handles = yes
+    kernel oplocks = no
+    kernel share modes = no
+    posix locking = no
+    vfs objects = catia fruit streams_xattr
+    ea support = yes
+    browseable = yes
+    read only = No
+    inherit acls = yes
+    fruit:time machine = yes
+    {% endfor %}
+{% endif %}
+

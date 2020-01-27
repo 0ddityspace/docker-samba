@@ -17,17 +17,24 @@ mapping:
                 required: yes
       "timemachine":
         type: map
-        required: yes
         mapping :
-          "enable": 
-            type: bool
+          "path":
+            type: str
+            required: yes
+          "users":
+            type: seq
+            required: yes
+            sequence:
+              - type:   str
+      "public":
+        type: map
+        mapping :
+          "name":
+            type: str
             required: yes
           "path":
             type: str
-          "users":
-            type: seq
-            sequence:
-              - type:   str
+            required: yes
       "shares":
         type: seq
         sequence:

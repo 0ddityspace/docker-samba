@@ -18,4 +18,4 @@ j2 /tmp/setup.sh.j2 /config/config.yaml | sh
 
 j2 /tmp/smb.conf.j2 /config/config.yaml > /etc/samba/smb.conf
 
-exec "${@}"
+#exec "${@}"
