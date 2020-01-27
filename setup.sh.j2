@@ -20,6 +20,13 @@ addgroup {{ user }} {{ share.id }}
     {%- endfor %}
 {% endfor %}
 
+{% if config.timemachine is defined %}
+    {%- for user in config.timemachine.users %}
+if [ ! -d "{{ config.timemachine.path }}/{{ user }}" ]; then mkdir -p "{{ config.timemachine.path }}/{{ user }}"; chmod 700 "{{ config.timemachine.path }}/{{ user }}"; fi
+chown -R {{ user }}:{{ user }} "{{ config.timemachine.path }}/{{ user }}"
+    {%- endfor %}
+{% endif %}
+
 ln -sf /dev/stdout /var/log/samba/samba.log
 
 exec "${@}"
