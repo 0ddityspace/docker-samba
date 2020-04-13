@@ -1,6 +1,8 @@
 FROM alpine:latest
 
 RUN apk add --update \
+    openrc \
+    dbus \
     avahi \
     py-pip \
     samba-client \
